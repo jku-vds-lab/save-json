@@ -9,14 +9,14 @@ Dump python server that stores data as JSON files in the `data/` folder.
   (e.g., with [Thunder](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client))
   Example JSON: 
   ```json
-  {
-    "filename": "foobar.json",
-    "data": {
-      //anything you want to store, e.g.:
-      "timestamp": "2022-11-11 11:11",
-      "event": "Carnival season kicks off"
+    {
+      "filename": "foobar.json",
+      "data": {
+        //anything you want to store, e.g.:
+        "timestamp": "2022-11-11 11:11",
+        "event": "Carnival season kicks off"
+      }
     }
-  }
 
 ## Local Setup
 ### Docker (no relaod on changes)
@@ -37,4 +37,16 @@ conda install --yes --file requirements.txt
 Start:
 ```sh
 uvicorn save-json.server:app --reload --port 9666
+```
+
+## Update Deployment
+
+```sh
+# build & tag
+docker build -t caleydo/save-json:latest .
+docker tag caleydo/save-json:latest 478950388974.dkr.ecr.eu-central-1.amazonaws.com/caleydo/save-json:latest
+# login to AWS and
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 478950388974.dkr.ecr.eu-central-1.amazonaws.com
+# push to AWS ECR
+docker push 478950388974.dkr.ecr.eu-central-1.amazonaws.com/caleydo/save-json:latest
 ```
