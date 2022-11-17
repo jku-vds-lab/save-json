@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import uvicorn # For debugging
 
-from fastapi import FastAPI, WebSocket
+from fastapi import FastAPI, Request
 from fastapi import __version__ as fastapi_version
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,7 +10,6 @@ from typing import Any, Dict
 from pydantic import BaseModel
 
 import json
-
 
 import logging
 _log = logging.getLogger(__name__)
@@ -22,6 +21,7 @@ _log.setLevel(logging.DEBUG)
 
 __author__ = 'Klaus Eckelt'
 
+
 app = FastAPI()
 _log.debug(f"fastapi version: {fastapi_version}")
 
@@ -29,6 +29,7 @@ origins = [
   "http://localhost",
   "http://127.0.0.1",
   "http://localhost:8080",
+  "https://jku-vds-lab.at/", # for https://jku-vds-lab.at/iguanodon/
 ]
 
 app.add_middleware(
@@ -38,6 +39,11 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"],
 )
+
+@app.middleware('http')
+async def validate_ip(request: Request, call_next):
+  _log.debug(f"request by {request.client.host}")
+  return await call_next(request)
 
 """
 Accepts JSONs that look like:
