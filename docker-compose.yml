@@ -1,0 +1,8 @@
+version: '2.0'
+services:
+  save-json:
+    build: .
+    ports:
+      - '9666:80'
+    volumes:
+    - ./data:/save-json/data
