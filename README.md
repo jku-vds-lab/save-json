@@ -19,7 +19,7 @@ Dump python server that stores data as JSON files in the `data/` folder.
     }
 
 ## Local Setup
-### Docker (no relaod on changes)
+### Docker (no reload on changes)
 
 ```sh
 docker-compose up
