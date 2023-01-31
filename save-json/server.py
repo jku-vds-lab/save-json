@@ -31,11 +31,13 @@ origins = [
   "http://localhost:8080",
   
   "http://172.17.0.1", # Docker Host
-  "https://172.17.0.1"
+  "https://172.17.0.1",
   
-  "http://jku-vds-lab.at/", # for https://jku-vds-lab.at/iguanodon/
-  "https://jku-vds-lab.at/",
+  "http://jku-vds-lab.at", # for https://jku-vds-lab.at/iguanodon/
+  "https://jku-vds-lab.at",
 ]
+
+_log.info(f"allows origins: {'  '.join(origins)}")
 
 app.add_middleware(
   CORSMiddleware,
