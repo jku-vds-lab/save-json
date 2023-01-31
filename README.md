@@ -5,10 +5,10 @@ Dump python server that stores data as JSON files in the `data/` folder.
 
 * Check if server is running: http://localhost:9666/
 * See and test the API via: http://localhost:9666/docs
-* Send POST requests to http://localhost:9666/save  
+* Send POST requests to http://localhost:9666/  
   (e.g., with [Thunder](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client))
   Example JSON: 
-  ```json
+  ```jsonc
     {
       "filename": "foobar.json",
       "data": {
@@ -40,6 +40,10 @@ uvicorn save-json.server:app --reload --port 9666
 ```
 
 ## Update Deployment
+
+Just for our internal reference:
+You will ned the AWS CLI, docker, and an AWS access key.
+
 
 ```sh
 # build & tag
