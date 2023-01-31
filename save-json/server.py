@@ -26,10 +26,15 @@ app = FastAPI()
 _log.debug(f"fastapi version: {fastapi_version}")
 
 origins = [
-  "http://localhost",
+  "http://localhost", # Local development
   "http://127.0.0.1",
   "http://localhost:8080",
-  "https://jku-vds-lab.at/", # for https://jku-vds-lab.at/iguanodon/
+  
+  "http://172.17.0.1", # Docker Host
+  "https://172.17.0.1"
+  
+  "http://jku-vds-lab.at/", # for https://jku-vds-lab.at/iguanodon/
+  "https://jku-vds-lab.at/",
 ]
 
 app.add_middleware(
