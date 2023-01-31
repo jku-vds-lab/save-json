@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POST Test</title>
+    <script>
+      // POST example from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data
+      function postData(data) {
+        fetch("https://save-json.caleydoapp.org/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ //stringify the data
+            filename: "test.json", //will be overwritten if it exists
+            data: {
+              text: "hello world",
+              timestamp: new Date().toLocaleString(),
+            },
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success", data);
+          })
+          .catch((error) => {
+            console.error("Error", error);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Simple Test for save-json</h1>
+    <button onclick="postData()">send POST request</button>
+    <p>Check the browser console to verify success.</p>
+  </body>
+</html>
